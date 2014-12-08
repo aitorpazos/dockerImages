@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+# Starting listener
+tnslsnr start
+# Starting DB
+sqlplus / as sysdba @oraStartup.sql
+
+echo "[hit enter key to exit] or run 'docker stop <container>'"
+read
+
+# Stopping listener
+tnslsnr stop
+# Stopping DB
+sqlplus / as sysdba @oraShutdown.sql
+
+echo "Exited $0"
