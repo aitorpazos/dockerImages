@@ -12,7 +12,7 @@
 ###############################################################################
  
 db_name='ORCL'
-memory_target=1G
+#memory_target=1G
 processes = 150
 # db_block_size=8192
 # db_domain=''

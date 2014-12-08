@@ -1,16 +1,31 @@
 #!/usr/bin/bash
 
+function shutdownOra {
+    # Stopping DB
+    sqlplus / as sysdba @$ORACLE_HOME/config/scripts/oraShutdown.sql
+    # Stopping listener
+    lsnrctl stop
+    tnslsnr stop
+    exit 0
+}
+
 # Starting listener
 tnslsnr start
+lsnrctl start
+
 # Starting DB
-sqlplus / as sysdba @oraStartup.sql
+sqlplus / as sysdba @$ORACLE_HOME/config/scripts/oraStartup.sql
 
-echo "[hit enter key to exit] or run 'docker stop <container>'"
-read
-
-# Stopping listener
-tnslsnr stop
-# Stopping DB
-sqlplus / as sysdba @oraShutdown.sql
+case "$-" in
+    *i*)
+        echo "[hit enter key to exit] or run 'docker stop <container>'";
+        read;
+        shutdownOra
+        ;;
+    *)
+        trap shutdownOra SIGINT SIGTERM;
+        while true; do sleep 10m; done
+        ;;
+esac
 
 echo "Exited $0"
