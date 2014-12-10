@@ -26,8 +26,8 @@ https://github.com/wscherphof/oracle-12c
 
 Before building the image, you should download these files from Oracle's web 
 site (http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html):
-    - linuxamd64_12102_database_1of2.zip
-    - linuxamd64_12102_database_2of2.zip
+    - linuxamd64_12c_database_1of2.zip
+    - linuxamd64_12c_database_2of2.zip
 
 ### Dependencies
 

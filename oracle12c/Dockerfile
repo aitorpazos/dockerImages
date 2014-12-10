@@ -1,8 +1,8 @@
 FROM aitorpazos/centos7_oracle:centosJdk7
 MAINTAINER Aitor Pazos <mail@aitorpazos.es> 
 
-ADD linuxamd64_12102_database_1of2.zip /tmp/install/linuxamd64_12c_database_1of2.zip
-ADD linuxamd64_12102_database_2of2.zip /tmp/install/linuxamd64_12c_database_2of2.zip
+ADD linuxamd64_12c_database_1of2.zip /tmp/install/linuxamd64_12c_database_1of2.zip
+ADD linuxamd64_12c_database_2of2.zip /tmp/install/linuxamd64_12c_database_2of2.zip
 
 RUN yum groupinstall "Development Tools" -y && yum install -y binutils compat-libstdc++-33 compat-libstdc++-33.i686 gcc gcc-c++ glibc glibc.i686 glibc-devel glibc-devel.i686 ksh libgcc libgcc.i686 libstdc++ libstdc++.i686 libstdc++-devel libstdc++-devel.i686 libaio libaio.i686 libaio-devel libaio-devel.i686 libXext libXext.i686 libXtst libXtst.i686 libX11 libX11.i686 libXau libXau.i686 libxcb libxcb.i686 libXi libXi.i686 make sysstat unixODBC unixODBC-devel zlib-devel lsof smartmontools && cd /tmp/install && unzip linuxamd64_12c_database_1of2.zip && unzip linuxamd64_12c_database_2of2.zip && rm *.zip
 
