@@ -1,4 +1,4 @@
-# dockerImages
+﻿# dockerImages
 
 ## Oracle DB on CentOS 7
 
@@ -31,4 +31,4 @@ site (http://www.oracle.com/technetwork/database/enterprise-edition/downloads/in
 
 ### Dependencies
 
-aitorpazos/centos7_oracle:centosJdk7
+aitorpazos/centos7_oracle:oracle12cBinBase

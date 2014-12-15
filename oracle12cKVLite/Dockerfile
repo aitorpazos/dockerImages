@@ -1,11 +1,11 @@
-FROM aitorpazos/centos7_oracle:centosJdk7
+FROM aitorpazos/centos7_oracle:centosJDK7
 MAINTAINER Aitor Pazos <mail@aitorpazos.es>
 
-RUN useradd -m -u 54321 oracle && echo "oracle:oracle" | chpasswd
+RUN useradd -m -u 54321 oracle && \
+	$(echo "oracle:oracle" | chpasswd ) && \
+    chown -R oracle:oracle /home/oracle/
 
-WORKDIR /home/oracle
 ADD kv-ce-3.2.5.tar.gz /home/oracle/
-RUN chown -R oracle:oracle /home/oracle/
 
 EXPOSE 5000 5001
 
