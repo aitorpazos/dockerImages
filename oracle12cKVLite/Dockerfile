@@ -11,4 +11,4 @@ EXPOSE 5000 5001
 
 USER oracle
 WORKDIR /home/oracle/kv-3.2.5/
-CMD java -jar lib/kvstore.jar kvlite
+CMD java -jar lib/kvstore.jar kvlite -root $HOME/kvroot -store kvstore

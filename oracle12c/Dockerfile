@@ -46,24 +46,25 @@ RUN rm -rf /tmp/install && \
 	rm -f /u01/app/oracle/product/12.1.0/db_1/rdbms/lib/config.o && \
 	su oracle -c relink all && \
 	$ORACLE_HOME/root.sh && \
-	mkdir -p $ORACLE_BASE/oradata && \
+	mkdir -p $ORACLE_BASE/oradata/data && \
+	mkdir -p $ORACLE_BASE/oradata/flash_recovery_area && \
+	mkdir -p $ORACLE_BASE/oradata/control2 && \
+	mkdir -p $ORACLE_BASE/oradata/control1 && \
+	mkdir -p $ORACLE_BASE/oradata/adump && \
+	mkdir -p $ORACLE_BASE/oradata/diag && \
 	chown -R oracle:oinstall $ORACLE_BASE/oradata && \
 	chmod -R 775 $ORACLE_BASE/oradata && \
-	mkdir -p $ORACLE_BASE/fast_recovery_area && \
-	chown -R oracle:oinstall $ORACLE_BASE/fast_recovery_area && \
-	chmod -R 775 $ORACLE_BASE/fast_recovery_area && \
-	/tmp/create && \
-	rm /tmp/create && \
 	chmod 755 \
 		$ORACLE_HOME/config/scripts/oraStartup.sql \
 		$ORACLE_HOME/config/scripts/oraShutdown.sql \
-		/home/oracle/start
+		/home/oracle/start && \
+	/tmp/create && \
+	rm /tmp/create 
 
 EXPOSE 1521
 
 USER oracle
 WORKDIR /home/oracle/
 CMD /home/oracle/start 
-
-
+VOLUME /u01/app/oracle/oradata
 

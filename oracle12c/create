@@ -18,35 +18,11 @@ mount -t tmpfs shmfs -o size=4g /dev/shm
 
 date
 echo "Creating database..."
+su -s /bin/bash oracle -c "dbca -silent -createDatabase -templateName General_Purpose.dbc -sid ORCL -responseFile NO_VALUE -characterSet AL32UTF8 -memoryPercentage 30 -emConfiguration LOCAL -gdbname orcl -sysPassword admin2DB -systemPassword admin2DB -datafileDestination /u01/app/oracle/oradata/data -recoveryAreaDestination /u01/app/oracle/oradata/flash_recovery_area -initParams control_files='/u01/app/oracle/oradata/control1/ora_control',control_files='/u01/app/oracle/oradata/control2/ora_control',audit_file_dest='/u01/app/oracle/oradata/adump',diagnostic_dest='/u01/app/oracle/oradata/diag'" 
+
+echo "Creating ORCL_USER..."
 su -s /bin/bash oracle -c "sqlplus /nolog @?/config/scripts/createdb.sql"
 echo ""
 
-date
-echo "Running catalog.sql..."
-cd $ORACLE_HOME/rdbms/admin
-cp catalog.sql catalog-e.sql
-echo "exit" >> catalog-e.sql
-su -s /bin/bash oracle -c "sqlplus / as sysdba @?/rdbms/admin/catalog-e.sql > /tmp/catalog.log"
-rm catalog-e.sql
-echo ""
-
-date
-echo "Running catproc.sql..."
-cd $ORACLE_HOME/rdbms/admin
-cp catproc.sql catproc-e.sql
-echo "exit" >> catproc-e.sql
-su -s /bin/bash oracle -c "sqlplus / as sysdba @?/rdbms/admin/catproc-e.sql > /tmp/catproc.log"
-rm catproc-e.sql
-echo ""
-
-date
-echo "Running pupbld.sql..."
-cd $ORACLE_HOME/sqlplus/admin
-cp pupbld.sql pupbld-e.sql
-echo "exit" >> pupbld-e.sql
-su -s /bin/bash oracle -c "sqlplus system/manager @?/sqlplus/admin/pupbld-e.sql > /tmp/pupbld.log"
-rm pupbld-e.sql
-echo ""
-
-date
-echo "Create is done; commit the container now"
+echo "Shutting down DB..."
+su -s /bin/bash oracle -c "sqlplus / as sysdba @?/config/scripts/oraShutdown.sql"

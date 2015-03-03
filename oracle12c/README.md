@@ -29,6 +29,8 @@ site (http://www.oracle.com/technetwork/database/enterprise-edition/downloads/in
     - linuxamd64_12c_database_1of2.zip
     - linuxamd64_12c_database_2of2.zip
 
+Custom docker build in order to increase /dev/shm size
+
 ### Dependencies
 
 aitorpazos/centos7_oracle:oracle12cBinBase

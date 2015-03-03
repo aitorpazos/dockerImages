@@ -12,19 +12,24 @@
 ###############################################################################
  
 db_name='ORCL'
+compatible ='12.1.0'
+nls_length_semantics=CHAR
 #memory_target=1G
+java_pool_size=30000000
 processes = 150
+open_cursors=300
 # db_block_size=8192
 # db_domain=''
-db_create_file_dest='/u01/app/oracle/oradata'
-db_recovery_file_dest='/u01/app/oracle/fast_recovery_area'
+db_create_file_dest='/u01/app/oracle/oradata/data'
+db_recovery_file_dest='/u01/app/oracle/oradata/flash_recovery_area'
 db_recovery_file_dest_size=2G
-diagnostic_dest='/u01/app/oracle'
-dispatchers='(PROTOCOL=TCP) (SERVICE=ORCLXDB)'
-open_cursors=300 
-remote_login_passwordfile='EXCLUSIVE'
-undo_tablespace='UNDOTBS1'
+diagnostic_dest='/u01/app/oracle/'
+audit_file_dest='/u01/app/oracle/oradata/adump'
+audit_trail ='db'
 # You may want to ensure that control files are created on separate physical
 # devices
-# control_files = (ora_control1, ora_control2)
-compatible ='12.1.0'
+control_files = (/u01/app/oracle/oradata/control/ora_control1, /u01/app/oracle/oradata/control/ora_control2)
+dispatchers='(PROTOCOL=TCP) (SERVICE=ORCLXDB)'
+remote_login_passwordfile='EXCLUSIVE'
+undo_tablespace='UNDOTBS1'
+
