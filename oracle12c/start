@@ -24,7 +24,7 @@ case "$-" in
         ;;
     *)
         trap shutdownOra SIGINT SIGTERM;
-        while true; do sleep 10m; done
+        while true; do sleep 2; done
         ;;
 esac
 
