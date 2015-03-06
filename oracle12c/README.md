@@ -17,7 +17,7 @@ at mount: "mount: permission denied". These errors occur when trying to remount
 affect image building process but it's something it should be fixed, and I'm
 leaving it there as a reminder ;-).
 
-Oracle DB does take longer than other software to shutdown. You shoud use `docker stop --time=x` where x should give Oracle seconds enough to shutdown.
+Oracle DB takes longer than other software to shutdown. You shoud use `docker stop --time=x <container>` where x should give Oracle seconds enough to shutdown properly.
 
 ## Credits
 
@@ -28,8 +28,9 @@ https://github.com/wscherphof/oracle-12c
 
 Before building the image, you should download these files from Oracle's web 
 site (http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html):
-    - linuxamd64_12c_database_1of2.zip
-    - linuxamd64_12c_database_2of2.zip
+
+ - linuxamd64_12c_database_1of2.zip
+ - linuxamd64_12c_database_2of2.zip
 
 ### Dependencies
 
