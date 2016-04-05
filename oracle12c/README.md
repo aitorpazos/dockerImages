@@ -7,18 +7,16 @@ on CentOS 7. This image has a user ORCL_USER (PASSWORD: admin2DB) granted
 ORCL_USERS role with the following grants: CREATE session, CREATE table, 
 CREATE sequence, CREATE trigger, CREATE view, CREATE procedure and CREATE synonym.
 
-Due to limitations of docker's /dev/shm mount implementation, it is limited to 64MB,
-which might impact Oracle DB performance (https://github.com/docker/docker/issues/2606).
-You need to recompile docker yourself in order to increase this value.
-
-You'll see some messages building this image complaining about permission denied
-at mount: "mount: permission denied". These errors occur when trying to remount
-/dev/shm with a bigger size because build is not ran as privileged. It dosen't 
-affect image building process but it's something it should be fixed, and I'm
-leaving it there as a reminder ;-).
-
 Oracle DB takes longer than other software to shutdown. You shoud use `docker stop --time=x <container>` where x should give Oracle seconds enough to shutdown properly.
 
+### Running
+
+Docker version >=1.10 is required. This version introduced the hability of setting a SHM size >64MB, which is required by Oracle DB.
+
+Example:
+```
+docker run -d -v oracleDBVol:/u01/app/oracle/oradata -p 1521:1521 --name oracleDB1 --shm-size=1GB aitorpazos/centos7_oracle:oracle12c
+```
 ## Credits
 
 This image has been built based on the one described on: 
